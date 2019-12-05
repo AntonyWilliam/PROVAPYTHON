@@ -1,0 +1,92 @@
+QUESTÃO 1
+
+
+def main():
+ import a1
+ dici = a1.a1
+ usuariosmain = dici.usuarios = {"usuario1": "senha1",
+             "usuario2": "senha2",
+             "usuario3": "senha3"
+             }
+
+ usuario = str(input("Coloque o usuario com quem deseja logar!!"))
+ senha = str(input("Coloque a senha desse usuario!!"))
+
+ if dici.login(usuariosmain,usuario, senha):
+     print("LOGIN FEITO COM SUCESSO :")
+ else:
+     print("Login Falhou")
+
+
+main()
+
+
+class a1(object):
+    def __init__(self):
+        self.usuarios = {}
+    def getUsuario(self):
+        return self.usuarios.keys()
+    def getSenha(self):
+        return self.usuarios.values()
+
+    def addUsuario(self, usuario,senha):
+        self.usuarios[usuario] = senha
+
+    def cadastro(self):
+            nome_de_usuario = str(input("Coloque o nome de usuario :"))
+            if nome_de_usuario in a1.getUsuario():
+                print("Usuario ja cadastrado tente novamente!! :")
+                a1.cadastro()
+            else:
+                senha = str(input("Coloque a senha!!:"))
+                if senha in a1.getSenha():
+                    print("Senha ja cadastrada tente novamente :")
+                    a1.cadastro()
+                else:
+                    a1.addUsuario(nome_de_usuario, senha)
+                    print("USUARIO CADASTRADO :")
+
+    def login(self,usuarios, usuario, senha):
+        if usuario in a1.usuarios.keys() and a1.usuarios.get(usuario) == senha:
+            return True
+        else:
+            return False
+
+a1 = a1()
+
+
+QUESTÃO 2
+
+alunos = {}
+alunosAprovados = {}
+alunosReprovados = {}
+alunosReprovadosFalta = {}
+alunosAprovadosPraFInal = {}
+
+for i in range(0,4):
+ nome = str(input("Qual e o nome do aluno?:"))
+ faltas = int(input("Qual e o numero de faltas do aluno?"))
+ if faltas>5:
+     print("ALUNO REPROVADO POR FALTA!!")
+     alunos[nome] = faltas
+     alunosReprovadosFalta[nome] = faltas
+ else:
+  nota1 = float(input("Primeira nota do aluno:"))
+  nota2 = float(input("Segunda nota do aluno:"))
+  media = nota1+nota2/2
+  if media>=5 and media<=6.9:
+      print("ALUNO APROVADO PARA A FINAL!!")
+      alunos[nome] = media
+  elif media>=7:
+      alunosAprovados[nome] = media
+      print("ALUNO APROVADO POR MEDIA!!")
+      alunos[nome] = media
+  else:
+      alunosReprovados[nome] = media
+      print("ALUNO REPROVADO POR MEDIA!!")
+      alunos[nome] = media
+
+print("Os alunos aprovados foram nome: nota.",alunosAprovados)
+print("Os alunos reprovados por falta foram nome: numero de faltas.", alunosReprovadosFalta)
+print("Os Alunos reprovados por media foram nome: nota.",alunosReprovados)
+print("Os alunos aprovados para a final foram nome: nota.", alunosAprovadosPraFInal)
